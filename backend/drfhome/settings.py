@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # internaml apps
     'drf_api',
+    'products',
 ]
 
 MIDDLEWARE = [

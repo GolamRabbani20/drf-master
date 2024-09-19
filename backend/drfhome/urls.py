@@ -21,5 +21,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('drf_api.urls')),
+    path('api/', include('drf_api.urls')), # http://localhost:8000/api
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
