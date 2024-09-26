@@ -5,7 +5,7 @@ import requests
 endpoint = 'http://localhost:8000/api/'  # http://127.0.0.1:8001/
 
 
-get_response = requests.get(endpoint, params={'abc': 123}, json={'name': 'Bangladesh', 'age': 25}) # HTTP Request
+get_response = requests.post(endpoint, json={'title': 'Apple' ,'content': 'OK', 'price': 120}) # HTTP Request
 # print(get_response.headers)
 # print(get_response.text) # print raw text response
 
