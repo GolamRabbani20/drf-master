@@ -9,6 +9,7 @@ except:
     
 
 if product_id:
+    headers = {'Authorization': 'Bearer cdf2fc59c055efda9099d766410c4266eff82ac4'} # Staff
     endpoint = f'http://localhost:8000/product/{product_id}/delete/'
-    get_response = requests.delete(endpoint) # HTTP Request
+    get_response = requests.delete(endpoint, headers=headers) # HTTP Request
     print(get_response.status_code, get_response.status_code==204)

@@ -7,27 +7,37 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 # from django.http import Http404
-from drf_api.mixins import StaffEditorPermissionMixin
+from drf_api.mixins import StaffEditorPermissionMixin, UserQuerySetMixin
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Details view
-class ProductDetailAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
+class ProductDetailAPIView(StaffEditorPermissionMixin, generics.RetrieveAPIView, UserQuerySetMixin):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 product_detail_view = ProductDetailAPIView.as_view()
 
 # List and Create both in one method
-class ProductListCreateAPIView(StaffEditorPermissionMixin, generics.ListCreateAPIView):
+class ProductListCreateAPIView(StaffEditorPermissionMixin, UserQuerySetMixin, generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
     def perform_create(self, serializer):
         # print(serializer.validated_data)
         title = serializer.validated_data.get('title')
         content = serializer.validated_data.get('content') or None
         if content is None:
             content = title
-        serializer.save(content=content)
+        serializer.save(user=self.request.user, content=content)
+        
+    # Replaced by mixin
+    # def get_queryset(self, *args, **kwargs):
+    #     qs = super().get_queryset(*args, **kwargs)
+    #     request = self.request
+    #     user=request.user
+    #     # print(dir(request))
+    #     if not user.is_authenticated:
+    #         return Product.objects.none()
+    #     return qs.filter(user=user)
+    
 product_list_create_view = ProductListCreateAPIView.as_view()
 
 # Function based view
@@ -60,7 +70,7 @@ def Products_all_Views(request, pk=None, *args, **kwarg):
 
 #------------------------------------------------------------------------------>| Destroy & Update |<---------------------------------------------------------------------------------
 # Delete API View
-class ProductDestroyAPIView(StaffEditorPermissionMixin, generics.DestroyAPIView):
+class ProductDestroyAPIView(StaffEditorPermissionMixin, generics.DestroyAPIView, UserQuerySetMixin):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
@@ -71,12 +81,12 @@ class ProductDestroyAPIView(StaffEditorPermissionMixin, generics.DestroyAPIView)
 product_delete_view = ProductDestroyAPIView.as_view()
 
 # Update API View
-class ProductUpdateAPIView(StaffEditorPermissionMixin, generics.UpdateAPIView):
+class ProductUpdateAPIView(StaffEditorPermissionMixin, generics.UpdateAPIView, UserQuerySetMixin):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
    
-    def perform_destroy(self, serializer):
+    def perform_update(self, serializer):
         instance = serializer.save()
         if not instance.content:
             instance.content = instance.title

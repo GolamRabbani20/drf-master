@@ -1,9 +1,9 @@
 import requests
 
-headers = {'Authorization': 'Bearer 0ac50eb694d284447272091db53e81e15f04991e'}
+headers = {'Authorization': 'Bearer cdf2fc59c055efda9099d766410c4266eff82ac4'} #Staff
 endpoint = 'http://localhost:8000/product/'
 data = {
-    'title': 'Jackfruit',
+    'title': 'Orange20',
     'price': 654
 }
 get_response = requests.post(endpoint, json=data, headers=headers) # HTTP Request
