@@ -20,6 +20,7 @@ product_detail_view = ProductDetailAPIView.as_view()
 class ProductListCreateAPIView(StaffEditorPermissionMixin, UserQuerySetMixin, generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+ 
     def perform_create(self, serializer):
         # print(serializer.validated_data)
         title = serializer.validated_data.get('title')

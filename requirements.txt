@@ -5,3 +5,4 @@ requests
 django-cors-headers
 psycopg2
 pillow
+algoliasearch-django>=3.0,<4.0

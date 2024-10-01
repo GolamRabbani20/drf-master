@@ -11,28 +11,25 @@ class ProductInLineSerializer(serializers.Serializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     owner = UserPublicSerializer(source='user', read_only=True)
-    related_products = ProductInLineSerializer(source='user.product_set.all', read_only=True, many=True)
+    # related_products = ProductInLineSerializer(source='user.product_set.all', read_only=True, many=True)
     # my_user_data = serializers.SerializerMethodField()
-    my_discount = serializers.SerializerMethodField(read_only=True)
-    update_url = serializers.SerializerMethodField(read_only=True)
+    # my_discount = serializers.SerializerMethodField(read_only=True)
+    # update_url = serializers.SerializerMethodField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name='product-detail', lookup_field='pk')
     title = serializers.CharField(validators=[validateTitle, hello_not_allow_in_title, unique_product_title]) #External validators
     # name = serializers.CharField(source='title', read_only=True)
     class Meta:
         model = Product
         fields = [
-            # 'my_user_data',
             'owner',
             'url',
-            'update_url',
             'id',
             'title',
             'content',
             'price',
             'image',
             'sale_price',
-            'my_discount',
-            'related_products'
+            'public'
         ]
 
     # def get_my_user_data(self, obj):
@@ -50,19 +47,19 @@ class ProductSerializer(serializers.ModelSerializer):
     #         raise serializers.ValidationError(f"{value} is already a product name.")
     #     return value
 
-    def get_update_url(self, obj):
-        # return f"/product/veiwsets/{obj.pk}/"
-        request = self.context.get('request') # self.request
-        if request is None:
-            return None
-        return reverse('product-update', kwargs={'pk': obj.pk}, request=request)
+    # def get_update_url(self, obj):
+    #     # return f"/product/veiwsets/{obj.pk}/"
+    #     request = self.context.get('request') # self.request
+    #     if request is None:
+    #         return None
+    #     return reverse('product-update', kwargs={'pk': obj.pk}, request=request)
 
 
-    def get_my_discount(self, obj):
-        if not hasattr(obj, 'id'):
-            return None
-        if not isinstance(obj, Product):
-            return None
-        return obj.get_discount()
+    # def get_my_discount(self, obj):
+    #     if not hasattr(obj, 'id'):
+    #         return None
+    #     if not isinstance(obj, Product):
+    #         return None
+    #     return obj.get_discount()
 
         
