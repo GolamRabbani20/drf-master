@@ -17,6 +17,7 @@ class ProductSerializer(serializers.ModelSerializer):
     # update_url = serializers.SerializerMethodField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name='product-detail', lookup_field='pk')
     title = serializers.CharField(validators=[validateTitle, hello_not_allow_in_title, unique_product_title]) #External validators
+    body = serializers.CharField(source='content', read_only=True)
     # name = serializers.CharField(source='title', read_only=True)
     class Meta:
         model = Product
@@ -25,11 +26,12 @@ class ProductSerializer(serializers.ModelSerializer):
             'url',
             'id',
             'title',
-            'content',
+            'body',
             'price',
             'image',
             'sale_price',
-            'public'
+            'public',
+            'endpoint',
         ]
 
     # def get_my_user_data(self, obj):

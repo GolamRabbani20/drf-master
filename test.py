@@ -10,3 +10,8 @@ print(fname)
 
 p = True
 p and print('hello')
+
+x = '       bangla            '
+print(x.strip())
+mm = ',,,,,,,,,,,,,read.............book.......only'
+print(mm.strip(',.boknly'))

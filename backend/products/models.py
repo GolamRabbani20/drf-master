@@ -45,6 +45,10 @@ class Product(models.Model):
                 img.thumbnail(output_size)
                 img.save(self.image.path)
 
+    @property
+    def body(self):
+        return self.content
+
     def get_discount(self):
         return '124'
     
@@ -61,6 +65,15 @@ class Product(models.Model):
     
     def get_tags_list(self):
         return [random.choice(TAGS_MODEL_VALUES)]
+    
+    def absolute_url(self):
+        return f'/product/{self.pk}/'
+
+    @property
+    def endpoint(self):
+        return self.absolute_url()
+    
+    
     
     
    

@@ -15,7 +15,7 @@ def perform_search(query, **kwargs):
     index = get_index()
     params = {}
     tags = ''
-    print(kwargs)
+    # print(kwargs)
     if 'tags' in kwargs:
         tags = kwargs.pop('tags') or []
         if len(tags) != 0:
