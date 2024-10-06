@@ -13,7 +13,7 @@ if auth_response.status_code == 200:
         'Authorization': f'Bearer {token}'
     }
 
-    endpoint = 'http://localhost:8000/product/'
+    endpoint = 'http://localhost:8000/api/product/'
     get_response = requests.get(endpoint, headers=headers) # HTTP Request
     print(get_response.json())
     # print(get_response.json()[0]['title'])

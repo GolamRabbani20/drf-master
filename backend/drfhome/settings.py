@@ -74,7 +74,7 @@ CORS_ALLOWED_ORIGINS = []
 if DEBUG:
     CORS_ALLOWED_ORIGINS += [
     'http://localhost:8111',
-    'https://localhost:8111',
+    'https://localhost:8111'
     
 ]
 
@@ -190,6 +190,6 @@ ALGOLIA = {
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ["Bearer"],
-    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(seconds=30),
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(seconds=50),
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(minutes=1),
 }

@@ -8,21 +8,48 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css" integrity="sha256-KvFgFCzgqSErAPu6y9gz/AhZAvzK48VJASu3DpNLCEQ=" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/satellite-min.css" integrity="sha256-woeV7a4SRDsjDc395qjBJ4+ZhDdFn8AqswN1rlTO64E=" crossorigin="anonymous">
+
     <title>Login</title>
 </head>
 <body>
     <center>
         <br><br>
         <div class="container shadow p-3 mb-5 bg-body-tertiary rounded border">
-            <div class="container">
+                <label>Login Page</label>
                 <form  id="login-form" method="POST">
-                    <input class="form-control form-control-lg" type="text" name="username", placeholder="Your Username"><br>
-                    <input class="form-control form-control-lg" type="password" name="password", placeholder="Your Password"><br>
-                    <input type="submit" value="Login" class="btn btn-secondary">
+                    <input class="form-control form-control-md" type="text" name="username", placeholder="Username"><br>
+                    <input class="form-control form-control-md" type="password" name="password", placeholder="Password"><br>
+                    <input type="submit" value="Login" class="btn btn-outline-secondary">
                 </form>
-            </div>
         </div>
+
+        <form  id="search-form" method="GET">
+            <div class="d-flex container container shadow p-3 mb-5 bg-body-tertiary rounded border">
+                <input class="form-control " type="text" name="q", placeholder="Search"><br>
+                <input type="submit" value="Search" class="btn btn-outline-secondary">
+            </div>
+        </form>
+
+        <div id="content-container"></div>
     </center>
+
+    <div class="container">
+        <div id="searchbox"></div>
+        <div id="clear-refinements"></div>
+        <div id="user-list"></div><br>
+        <div><h6>Public</h6>
+            <div id="public-list"></div>
+        </div><br>
+        <div id="hits"></div>
+    </div>
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.24.0/dist/algoliasearch-lite.umd.js" integrity="sha256-b2n6oSgG4C1stMT/yc/ChGszs9EY/Mhs6oltEjQbFCQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.74.2/dist/instantsearch.production.min.js" integrity="sha256-LfyQz2E24221PkRbKoakchcpdlZOA4R1Ugi6NnhyGF0=" crossorigin="anonymous"></script>
+    
     <script src="./client.js"></script>
 </body>
 </html>
